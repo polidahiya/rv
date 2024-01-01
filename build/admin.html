@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin</title>
+    <style>
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+      body {
+        margin: 0;
+      }
+      ::-webkit-scrollbar {
+        background-color: transparent;
+      }
+      nav {
+        height: 40px;
+        width: 100%;
+        position: sticky;
+        top: 0;
+        left: 0;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        padding-inline: 30px;
+        box-sizing: border-box;
+        box-shadow: 0px 0px 10px rgba(128, 128, 128, 0.322);
+        z-index: 100;
+      }
+      nav button {
+        height: 80%;
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        cursor: pointer;
+        border-radius: 100px;
+        padding-inline: 20px;
+      }
+      nav button img {
+        height: 70%;
+        aspect-ratio: 1;
+      }
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        margin-top: 10px;
+        padding: 10px;
+      }
+      .comp {
+        width: 100%;
+        max-width: 500px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-inline: 10px;
+        box-sizing: border-box;
+        padding: 10px;
+        box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.3);
+        background-image: linear-gradient(-45deg, pink, rgba(0, 204, 255, 0.5));
+      }
+      textarea,
+      input,
+      button {
+        border: none;
+        outline: none;
+      }
+      .comp textarea {
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        aspect-ratio: 30/5;
+        border-radius: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      .comp > input {
+        width: 70%;
+        aspect-ratio: 30/5;
+        border-radius: 10px;
+        text-align: center;
+      }
+      .comp > button {
+        background-color: skyblue;
+        border: none;
+        padding: 5px 20px;
+        margin-top: 20px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      /* images */
+      .imagecontainer {
+        width: 100%;
+        aspect-ratio: 16/4.5;
+        display: flex;
+        gap: 10px;
+      }
+      .imagecontainer .image {
+        position: relative;
+        border: 1px solid white;
+        box-sizing: border-box;
+        overflow: hidden;
+        width: 100%;
+        aspect-ratio: 16/9;
+        border-radius: 10px;
+      }
+      .image1::before {
+        position: absolute;
+        content: "+ Image1";
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .image2::before {
+        position: absolute;
+        content: "+ Image2";
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .imagecontainer .image img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
+      .imagecontainer .image input {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+      }
+      /* added comp */
+      .innercomp {
+        width: 100%;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .innercomp input {
+        height: 100%;
+        aspect-ratio: 50/5;
+        border-radius: 50px 0 0 50px;
+        border: none;
+        box-sizing: border-box;
+        text-indent: 20px;
+      }
+      .innercomp button {
+        height: 100%;
+        box-sizing: border-box;
+        padding-inline: 20px;
+        border-radius: 0 50px 50px 0;
+        border: none;
+        cursor: pointer;
+      }
+      .innercomp button:hover {
+        background-color: skyblue;
+      }
+      .addedelements {
+        width: 100%;
+        display: flex;
+        margin-top: 10px;
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .addedelements span {
+        width: 80%;
+        padding: 10px;
+        box-sizing: border-box;
+      }
+      .addedelements button {
+        width: 20%;
+        min-width: 70px;
+        cursor: pointer;
+      }
+      .addedelements button:hover {
+        background-color: rgb(255, 79, 79);
+      }
+      /* best students */
+      .beststudesntscontainer {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+      }
+      .studentscard {
+        width: 100%;
+        overflow: hidden;
+      }
+      .studentimgcont {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 10px;
+        overflow: hidden;
+        border: 1.5px solid white;
+        box-sizing: border-box;
+      }
+      .studentimgcont::before {
+        position: absolute;
+        content: "Image";
+        text-align: center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .studentimgcont img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .studentimgcont input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+      }
+      .studentscard > input {
+        width: 100%;
+        height: 30px;
+        border-radius: 30px;
+        outline: none;
+        box-sizing: border-box;
+        margin-top: 10px;
+        text-align: center;
+      }
+      /*  */
+      .changepassword input {
+        margin-top: 10px;
+      }
+      /* login */
+      .loginscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 200;
+        height: 100dvh;
+        width: 100%;
+        overflow: hidden;
+        display: grid;
+        place-content: center;
+        background: url(./720843.jpg) center / cover;
+      }
+      .logincontainer {
+        height: 200px;
+        aspect-ratio: 5/3;
+        background-color: rgba(255, 255, 255, 0.4);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        backdrop-filter: blur(10px);
+      }
+      .logincontainer input {
+        background-color: rgba(255, 255, 255, 0.429);
+        border: 1.5px solid rgb(0, 0, 0);
+        border-radius: 100px;
+        height: 30px;
+        outline: none;
+        text-indent: 20px;
+        margin-top: 30px;
+      }
+      .logincontainer button {
+        margin: 10px;
+        border: none;
+        padding: 5px 20px;
+        border-radius: 20px;
+        background-color: rgb(119, 202, 202);
+        cursor: pointer;
+      }
+    </style>
+    <!-- alert -->
+    <style>
+      /* alert */
+      .alert {
+        position: fixed;
+        height: 60px;
+        width: calc(100% - 20px);
+        max-width: 400px;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        top: 50px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 500;
+        box-sizing: border-box;
+        padding: 10px;
+        border-radius: 10px;
+        animation: alertshow 0.3s forwards;
+        display: none;
+      }
+      .alert img {
+        height: 100%;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+      .alert .message {
+        font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
+          sans-serif;
+      }
+      .alert button {
+        height: 100%;
+        aspect-ratio: 1;
+        background-color: transparent;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 20px;
+      }
+      .alert button:hover {
+        background-color: rgb(0, 170, 255);
+      }
+      .loadingline {
+        position: absolute;
+        bottom: 0;
+        width: calc(100% - 20px);
+        border-radius: 5px;
+        height: 2px;
+        background-color: rgb(0, 170, 255);
+        animation: laodinglineanimation 3s linear forwards;
+      }
+      @keyframes laodinglineanimation {
+        0% {
+          width: calc(100% - 20px);
+        }
+        100% {
+          width: 0;
+        }
+      }
+      @keyframes alertshow {
+        0% {
+          transform: translateX(-50%) translateY(0px);
+        }
+        100% {
+          transform: translateX(-50%) translateY(20px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- alert -->
+    <div class="alert">
+      <img src="./Alert.svg" alt="" />
+      <div class="message"></div>
+      <button onclick="hidealert()">X</button>
+      <div class="loadingline"></div>
+    </div>
+    <!--  -->
+    <nav>
+      <h2>Admin</h2>
+      <button onclick="logout()">
+        <img src="./logout-svgrepo-com.svg" /><span>Logout</span>
+      </button>
+    </nav>
+    <main>
+      <div class="totalvisits comp">Total visiters: 10</div>
+      <div class="theme comp">
+        <h3>Theme Color</h3>
+        <input type="color" name="" id="theme" />
+        <button onclick="updatetheme()">Update</button>
+      </div>
+      <div class="mainheading comp">
+        <h3>Main heading</h3>
+        <textarea name="" id="mainheading"></textarea>
+        <button onclick="updatemainheading()">Update</button>
+      </div>
+      <div class="images comp">
+        <h3>Images</h3>
+        <div class="imagecontainer">
+          <div class="image image1">
+            <img src="" alt="" id="image1prev" />
+            <input
+              type="file"
+              name=""
+              id="image1"
+              onchange="changeimage1(this)"
+              accept="image/*"
+            />
+          </div>
+          <div class="image image2">
+            <img src="" alt="" id="image2prev" />
+            <input
+              type="file"
+              name=""
+              id="image2"
+              onchange="changeimage2(this)"
+              accept="image/*"
+            />
+          </div>
+        </div>
+        <button onclick="updateimages1nad2()">Update</button>
+      </div>
+      <div class="notebyceo comp">
+        <h3>Note By CEO</h3>
+        <textarea name="" id="notebyceo"></textarea>
+        <button onclick="updatenotebyceo()">Update</button>
+      </div>
+      <div class="address comp">
+        <h3>Address</h3>
+        <textarea name="" id="address"></textarea>
+        <p>Map link</p>
+        <textarea name="" id="maplink"></textarea>
+        <button onclick="updateaddress()">Update</button>
+      </div>
+      <div class="Contact comp">
+        <h3>Contact</h3>
+        <p>phone no</p>
+        <input type="text" name="" id="phoneno" />
+        <p>whatsapp no</p>
+        <input type="text" name="" id="whatsaappno" />
+        <p>whatsapp message</p>
+        <input type="text" name="" id="whatsaappmessage" />
+        <button onclick="updatecontact()">Update</button>
+      </div>
+      <!--  -->
+      <div class="openeninghours comp">
+        <h3>Opening Hours</h3>
+        <div class="innercomp">
+          <input type="text" name="" id="openinghours" />
+          <button onclick="addopeninghour()">Add</button>
+        </div>
+        <div class="addedopenhrscontainer">
+          <!-- added emements here -->
+        </div>
+        <button onclick="updateopeneninghours()">Update</button>
+      </div>
+      <!--  -->
+      <div class="whyus comp">
+        <h3>Why choose us</h3>
+        <div class="innercomp">
+          <input type="text" name="" id="whyus" />
+          <button onclick="addwhyus()">Add</button>
+        </div>
+        <div class="addedwhyuscontainer">
+          <!-- added emements here -->
+        </div>
+        <button onclick="updatewhyus()">Update</button>
+      </div>
+      <!--  -->
+      <div class="beststudents comp">
+        <h3>Best Students</h3>
+        <div class="beststudesntscontainer">
+          <div class="studentscard">
+            <div class="studentimgcont">
+              <img src="" alt="" id="stud1prev" />
+              <input
+                type="file"
+                name=""
+                id="studimg1"
+                onchange="changestdimg1(this)"
+                accept="image/*"
+              />
+            </div>
+            <input type="text" name="" id="stdname1" placeholder="Name" />
+            <input type="text" name="" id="stdsub1" placeholder="Subject" />
+            <input type="text" name="" id="stdmarks1" placeholder="Marks" />
+          </div>
+          <div class="studentscard">
+            <div class="studentimgcont">
+              <img src="" alt="" id="stud2prev" />
+              <input
+                type="file"
+                name=""
+                id="studimg2"
+                onchange="changestdimg2(this)"
+                accept="image/*"
+              />
+            </div>
+            <input type="text" name="" id="stdname2" placeholder="Name" />
+            <input type="text" name="" id="stdsub2" placeholder="Subject" />
+            <input type="text" name="" id="stdmarks2" placeholder="Marks" />
+          </div>
+          <div class="studentscard">
+            <div class="studentimgcont">
+              <img src="" alt="" id="stud3prev" />
+              <input
+                type="file"
+                name=""
+                id="studimg3"
+                onchange="changestdimg3(this)"
+                accept="image/*"
+              />
+            </div>
+            <input type="text" name="" id="stdname3" placeholder="Name" />
+            <input type="text" name="" id="stdsub3" placeholder="Subject" />
+            <input type="text" name="" id="stdmarks3" placeholder="Marks" />
+          </div>
+        </div>
+        <button onclick="uploadbeststd()">Update</button>
+      </div>
+      <div class="changepassword comp">
+        <h3>Change Password</h3>
+        <input type="text" id="currentpass" placeholder="Current Password" />
+        <input type="text" id="newpass" placeholder="New Password" />
+        <button onclick="updatepassword()">Update</button>
+      </div>
+    </main>
+    <!-- login screeen -->
+    <div class="loginscreen">
+      <div class="logincontainer">
+        <h2>Admin</h2>
+        <label for="pass">Enter Password</label>
+        <input type="password" name="pass" id="password" />
+        <button onclick="login()">Submit</button>
+      </div>
+    </div>
+  </body>
+  <script>
+    // fetch 1
+    function fetch1(data) {
+      fetch("/update1", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.message == "true") {
+            showalertbox("Update Successfully");
+          } else {
+            showalertbox("Unable to update");
+          }
+        });
+    }
+    // update theme
+    function updatetheme() {
+      let data = {
+        theme: document.querySelector("#theme").value,
+      };
+      fetch1(data);
+    }
+    // update updatemainheading
+    function updatemainheading() {
+      let data = {
+        mainheading: document.querySelector("#mainheading").value,
+      };
+      fetch1(data);
+    }
+    // update images
+    let images1and2 = {};
+    function changeimage1(e) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        document.querySelector("#image1prev").src = e.target.result;
+        images1and2.image1 = e.target.result;
+      };
+      reader.readAsDataURL(e.files[0]);
+    }
+    function changeimage2(e) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        document.querySelector("#image2prev").src = e.target.result;
+        images1and2.image2 = e.target.result;
+      };
+      reader.readAsDataURL(e.files[0]);
+    }
+    // upload updateimages1nad2
+    function updateimages1nad2() {
+      let formdata = new FormData();
+      formdata.append("data", JSON.stringify(images1and2));
+      fetch("update2", {
+        method: "POST",
+        body: formdata,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.message == "true") {
+            showalertbox("Update Successfully");
+          } else {
+            showalertbox("Unable to update");
+          }
+        });
+    }
+    // update updatenotebyceo
+    function updatenotebyceo() {
+      let data = {
+        notebyceo: document.querySelector("#notebyceo").value,
+      };
+      fetch1(data);
+    }
+    // update updateaddress
+    function updateaddress() {
+      let data = {
+        address: document.querySelector("#address").value,
+        maplink: document.querySelector("#maplink").value,
+      };
+      fetch1(data);
+    }
+    // update updateaddress
+    function updatecontact() {
+      let data = {
+        phoneno: document.querySelector("#phoneno").value,
+        whatsaappno: document.querySelector("#whatsaappno").value,
+        whatsaappmessage: document.querySelector("#whatsaappmessage").value,
+      };
+      fetch1(data);
+    }
+    // update openening hours
+    let openinghoursarray = [];
+    function addopeninghour() {
+      openinghoursarray.push(document.querySelector("#openinghours").value);
+      //
+      createopeninghourchild(document.querySelector("#openinghours").value);
+      document.querySelector("#openinghours").value = "";
+    }
+    // create
+    function createopeninghourchild(value) {
+      let child = document.createElement("div");
+      child.innerHTML = `
+           <div class="addedopenhrs addedelements">
+              <span>${value}</span><button>Delete</button>
+            </div>
+          `;
+      document.querySelector(".addedopenhrscontainer").appendChild(child);
+      deleteopeninghrs();
+    }
+    // delete
+    function deleteopeninghrs() {
+      document.querySelectorAll(".addedopenhrs").forEach((item, i) => {
+        item.querySelector("button").onclick = () => {
+          openinghoursarray.splice(i, 1);
+          item.remove();
+          deleteopeninghrs();
+        };
+      });
+    }
+    deleteopeninghrs();
+    //
+    function updateopeneninghours() {
+      let data = {
+        openinghours: openinghoursarray,
+      };
+      fetch1(data);
+    }
+    // update why us
+    let whyusarray = [];
+    function addwhyus() {
+      whyusarray.push(document.querySelector("#whyus").value);
+      //
+      createwhyuschild(document.querySelector("#whyus").value);
+      document.querySelector("#whyus").value = "";
+    }
+    // create
+    function createwhyuschild(value) {
+      let child = document.createElement("div");
+      child.innerHTML = `
+           <div class="addedwhyus addedelements">
+              <span>${value}</span><button>Delete</button>
+            </div>
+          `;
+      document.querySelector(".addedwhyuscontainer").appendChild(child);
+      deletewhyus();
+    }
+    // delete
+    function deletewhyus() {
+      document.querySelectorAll(".addedwhyus").forEach((item, i) => {
+        item.querySelector("button").onclick = () => {
+          whyusarray.splice(i, 1);
+          item.remove();
+          deletewhyus();
+        };
+      });
+    }
+    deletewhyus();
+    //
+    function updatewhyus() {
+      let data = {
+        whyus: whyusarray,
+      };
+      fetch1(data);
+    }
+    // best students
+    let studimg1;
+    let studimg2;
+    let studimg3;
+    function changestdimg1(e) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        document.querySelector("#stud1prev").src = e.target.result;
+        studimg1 = e.target.result;
+      };
+      reader.readAsDataURL(e.files[0]);
+    }
+    function changestdimg2(e) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        document.querySelector("#stud2prev").src = e.target.result;
+        studimg2 = e.target.result;
+      };
+      reader.readAsDataURL(e.files[0]);
+    }
+    function changestdimg3(e) {
+      let reader = new FileReader();
+      reader.onload = (e) => {
+        document.querySelector("#stud3prev").src = e.target.result;
+        studimg3 = e.target.result;
+      };
+      reader.readAsDataURL(e.files[0]);
+    }
+    function uploadbeststd() {
+      let data = {
+        topstd: [
+          {
+            image: studimg1,
+            name: document.querySelector("#stdname1").value,
+            subject: document.querySelector("#stdsub1").value,
+            marks: document.querySelector("#stdmarks1").value,
+          },
+          {
+            image: studimg2,
+            name: document.querySelector("#stdname2").value,
+            subject: document.querySelector("#stdsub2").value,
+            marks: document.querySelector("#stdmarks2").value,
+          },
+          {
+            image: studimg3,
+            name: document.querySelector("#stdname3").value,
+            subject: document.querySelector("#stdsub3").value,
+            marks: document.querySelector("#stdmarks3").value,
+          },
+        ],
+      };
+      let formdata = new FormData();
+      formdata.append("data", JSON.stringify(data));
+      fetch("update2", {
+        method: "POST",
+        body: formdata,
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.message == "true") {
+            showalertbox("Update Successfully");
+          } else {
+            showalertbox("Unable to update");
+          }
+        });
+    }
+    // update password
+    function updatepassword() {
+      let data = {
+        cpass: document.querySelector("#currentpass").value,
+        npass: document.querySelector("#newpass").value,
+      };
+      fetch("updatepassword", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.message == "passupdated") {
+            showalertbox("Password updated");
+            document.querySelector("#currentpass").value = "";
+            document.querySelector("#newpass").value = "";
+          }
+          if (res.message == "wrongpass") {
+            showalertbox("Wrong password");
+          }
+        });
+    }
+    // fetch data back
+    function getdataback() {
+      fetch("/admindata")
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+          document.querySelector(".totalvisits").innerHTML =
+            "Total visiters: " + res.totalvisiters;
+          document.querySelector("#theme").value = res.theme;
+          document.querySelector("#mainheading").value = res.mainheading;
+          document.querySelector("#image1prev").src = res.image1;
+          document.querySelector("#image2prev").src = res.image2;
+          document.querySelector("#notebyceo").value = res.notebyceo;
+          document.querySelector("#address").value = res.address;
+          document.querySelector("#maplink").value = res.maplink;
+          document.querySelector("#phoneno").value = res.phoneno;
+          document.querySelector("#whatsaappno").value = res.whatsaappno;
+          document.querySelector("#whatsaappmessage").value =
+            res.whatsaappmessage;
+          res.openinghours.forEach((item) => {
+            createopeninghourchild(item);
+            openinghoursarray.push(item);
+          });
+          res.whyus.forEach((item) => {
+            createwhyuschild(item);
+            whyusarray.push(item);
+          });
+          // best std
+          document.querySelector("#stud1prev").src = res.topstd[0].image;
+          document.querySelector("#stdname1").value = res.topstd[0].name;
+          document.querySelector("#stdsub1").value = res.topstd[0].subject;
+          document.querySelector("#stdmarks1").value = res.topstd[0].marks;
+          studimg1 = res.topstd[0].image;
+          document.querySelector("#stud2prev").src = res.topstd[1].image;
+          document.querySelector("#stdname2").value = res.topstd[1].name;
+          document.querySelector("#stdsub2").value = res.topstd[1].subject;
+          document.querySelector("#stdmarks2").value = res.topstd[1].marks;
+          studimg2 = res.topstd[1].image;
+          document.querySelector("#stud3prev").src = res.topstd[2].image;
+          document.querySelector("#stdname3").value = res.topstd[2].name;
+          document.querySelector("#stdsub3").value = res.topstd[2].subject;
+          document.querySelector("#stdmarks3").value = res.topstd[2].marks;
+          studimg3 = res.topstd[2].image;
+        });
+    }
+    // check loged in or not
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(";").shift();
+    }
+    // loged in or not
+    if (getCookie("logedin")) {
+      document.querySelector(".loginscreen").style.display = "none";
+      getdataback();
+    }
+    // login
+    function login() {
+      fetch("/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          password: document.querySelector("#password").value,
+        }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message == "true") {
+            getdataback();
+            document.querySelector(".loginscreen").style.display = "none";
+            showalertbox("Login successfull");
+          } else {
+            showalertbox("Wrong Password");
+          }
+        });
+    }
+    // logout
+    if (localStorage.getItem("logoutmessage") == "true") {
+      showalertbox("Logout Successfully");
+      localStorage.setItem("logoutmessage", "false");
+    }
+    //
+    function logout() {
+      fetch("/logout")
+        .then((response) => response.json())
+        .then((data) => {
+          if (data.message == "logedout") {
+            localStorage.setItem("logoutmessage", "true");
+            window.location.reload();
+          } else {
+            showalertbox("Unable to Logout");
+          }
+        });
+    }
+    // alert
+    // show alert
+    let alerttimer;
+    function showalertbox(value) {
+      document.querySelector(".alert").style.display = "none";
+      setTimeout(() => {
+        document.querySelector(".alert").style.display = "flex";
+        document.querySelector(".message").innerHTML = value;
+        clearTimeout(alerttimer);
+        alerttimer = setTimeout(() => {
+          document.querySelector(".alert").style.display = "none";
+        }, 3000);
+      }, 1);
+    }
+    // hidealert
+    function hidealert() {
+      document.querySelector(".alert").style.display = "none";
+    }
+  </script>
+</html>

@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Carattere"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+      ::-webkit-scrollbar {
+        background-color: transparent;
+        width: 5px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background-color: var(--theme);
+        border-radius: 10px;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        --theme: rgb(199, 145, 36);
+        color: rgb(61, 61, 61);
+        font-family: Georgia, "Times New Roman", Times, serif;
+      }
+      button {
+        font-family: Georgia, "Times New Roman", Times, serif;
+        box-shadow: 5px 5px 5px rgba(128, 128, 128, 0.3);
+      }
+      nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100px;
+        width: 100vw;
+        overflow: hidden;
+        z-index: 100;
+        transition: 0.4s;
+      }
+      .transnav {
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(161, 161, 161, 0.333);
+      }
+      .innernav {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        max-width: 1000px;
+        margin: auto;
+        padding-inline: 20px 100px;
+        box-sizing: border-box;
+      }
+      .leftnav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .leftnav img {
+        height: 50px;
+        aspect-ratio: 1;
+      }
+      .leftnav .title {
+        font-family: Carattere;
+        font-size: 40px;
+        color: var(--theme);
+      }
+      .rightnav {
+        margin-left: auto;
+        display: flex;
+        gap: 20px;
+      }
+      .rightnav a {
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+        font-weight: 100;
+        text-decoration: none;
+        color: rgb(61, 61, 61);
+        font-size: 20px;
+      }
+      .rightnav a:nth-of-type(1) {
+        color: var(--theme);
+      }
+      /* page1 */
+      .page1 {
+        width: calc(100% - 30px);
+        margin: auto;
+        max-width: 1000px;
+        padding-top: 30px;
+        padding-bottom: 50px;
+        display: flex;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+      .page1 > div {
+        width: 50%;
+      }
+      .page1left {
+        padding-inline: 50px;
+        box-sizing: border-box;
+      }
+      .page1left .heading {
+        font-size: 45px;
+        margin-top: 100px;
+      }
+      .page1left .heading span {
+        color: var(--theme);
+      }
+      .page1left > p {
+        margin-top: 40px;
+      }
+      .page1left .buttoncontainer {
+        margin-top: 40px;
+        display: flex;
+        gap: 10%;
+      }
+      .page1left .buttoncontainer button {
+        height: 45px;
+        width: 150px;
+        background-color: var(--theme);
+        border: 1.5px solid var(--theme);
+        color: white;
+        border-radius: 30px 0;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      /*  */
+      .page1left .details {
+        display: flex;
+        width: 100%;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 50px;
+      }
+      .page1left .details span h2 {
+        text-align: center;
+        position: relative;
+      }
+      .page1left .details span h2::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        height: 50%;
+        border-radius: 100%;
+        aspect-ratio: 1;
+        background-color: var(--theme);
+        transform: translateX(-50%) translateY(-50%);
+      }
+      .page1left .details span p {
+        text-align: center;
+        transform: translateY(-100%);
+      }
+      /*  */
+      .page1right {
+        position: relative;
+      }
+      .page1right img {
+        width: 100%;
+        aspect-ratio: 3/4;
+        object-fit: cover;
+        object-position: 30%;
+        border-radius: 3% 3% 3% 50% / calc(3% * 3 / 4) calc(3% * 3 / 4)
+          calc(3% * 3 / 4) calc(50% * 3 / 4);
+      }
+      .page1right::before,
+      .page1right::after {
+        content: "";
+        position: absolute;
+        height: 30%;
+        aspect-ratio: 3/4;
+        background-color: var(--theme);
+        opacity: 0.2;
+        z-index: -1;
+      }
+      .page1right::before {
+        top: 10%;
+        left: -15%;
+        border-radius: 50% 3% 3% 3% / calc(50% * 3 / 4) calc(3% * 3 / 4)
+          calc(3% * 3 / 4) calc(3% * 3 / 4);
+      }
+      .page1right::after {
+        width: 30%;
+        bottom: -10%;
+        right: 10%;
+        aspect-ratio: 4/3;
+        border-radius: 3% 3% 50% 3% / calc(3% * 3 / 4) calc(3% * 3 / 4)
+          calc(50% * 3 / 4) calc(3% * 3 / 4);
+      }
+      /*  */
+      .page1bottom {
+        height: 100px;
+        width: calc(100% - 30px);
+        margin-inline: auto;
+        margin-top: 10px;
+        max-width: 1000px;
+        background-color: rgb(251, 251, 251);
+        border-radius: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        color: var(--theme);
+        font-size: 20px;
+        font-weight: 900;
+      }
+    </style>
+    <!-- page2 -->
+    <style>
+      .page2 {
+        width: calc(100% - 30px);
+        margin: auto;
+        max-width: 1000px;
+        padding-top: 30px;
+        padding-bottom: 30px;
+        box-sizing: border-box;
+      }
+      .whyus {
+        font-size: 50px;
+        text-align: center;
+        padding: 30px;
+        padding-top: 100px;
+      }
+      .innerpage2container {
+        display: flex;
+      }
+      .innerpage2container > div {
+        width: 100%;
+      }
+      .page2left img {
+        width: 100%;
+        aspect-ratio: 3/4;
+        object-fit: cover;
+        object-position: 30%;
+        border-radius: 3% 50% 3% 3% / calc(3% * 3 / 4) calc(50% * 3 / 4)
+          calc(3% * 3 / 4) calc(3% * 3 / 4);
+      }
+      .page2right {
+        padding-inline: 50px;
+        padding-top: 50px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px;
+      }
+      .page2right > .container {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+      .page2right > .container .number {
+        position: relative;
+        height: 80px;
+        aspect-ratio: 1;
+        font-size: 25px;
+        display: grid;
+        place-content: center;
+        font-weight: 900;
+      }
+      .page2right > .container .number::before {
+        content: "";
+        position: absolute;
+        height: 50%;
+        aspect-ratio: 1;
+        border-radius: 0 50%;
+        background-color: var(--theme);
+        z-index: -1;
+        left: 0;
+        bottom: 0;
+      }
+      .page2right > .container .text {
+        font-size: 20px;
+      }
+      .page2right > .container .text::first-letter {
+        color: var(--theme);
+        font-size: 25px;
+      }
+      /* outr best students */
+      .ourbeststudents {
+        font-size: 50px;
+        text-align: center;
+        padding: 30px;
+        margin-top: 50px;
+      }
+      .studentscontainer {
+        width: 100%;
+        height: 300px;
+        padding: 30px 0;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        overflow: hidden;
+      }
+      .studentscard {
+        position: relative;
+        height: 100%;
+        aspect-ratio: 1;
+        border-radius: 5%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        box-shadow: 0px 0px 10px rgba(161, 161, 161, 0.333);
+      }
+      .studentstar {
+        position: absolute;
+        left: 5%;
+        top: 5%;
+        height: 10%;
+        aspect-ratio: 1;
+        background-image: url(star-svgrepo-com.svg);
+        background-position: center;
+        background-size: contain;
+      }
+      .studentscard img {
+        height: 40%;
+        aspect-ratio: 1;
+        border-radius: 50%;
+      }
+      .studentscard .name {
+        font-size: 22px;
+        color: var(--theme);
+      }
+      /* note */
+      .note {
+        font-size: 50px;
+        text-align: center;
+        padding: 30px;
+        margin-top: 50px;
+      }
+      .notecontainer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        aspect-ratio: 16/5;
+        background-image: url(night\ classroom.jpg);
+        background-position: center;
+        background-size: cover;
+        color: white;
+        border-radius: 10px;
+        padding: 50px;
+        box-sizing: border-box;
+      }
+      .notecontainer h2 {
+        text-decoration: underline;
+      }
+      .notecontainer p {
+        width: 50%;
+        position: relative;
+        font-style: italic;
+        text-align: justify;
+      }
+      .notecontainer p::before {
+        position: absolute;
+        content: '"';
+        font-size: 50px;
+        top: 0;
+        left: 0;
+        transform: translate(-100%, -50%);
+      }
+      .notecontainer p::after {
+        position: absolute;
+        content: '"';
+        font-size: 50px;
+        bottom: 0;
+        right: 0;
+        transform: translate(100%, 50%);
+      }
+      /* footer */
+      footer {
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-between;
+        gap: 10px;
+        margin-bottom: 50px;
+        box-sizing: border-box;
+      }
+      footer > div {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        padding: 50px 0px;
+        box-sizing: border-box;
+        gap: 10px;
+        border-radius: 10px;
+        background: url(./desktop-3261768_1280.jpg) center / cover;
+      }
+      footer > div h3 {
+        font-size: 25px;
+      }
+      footer > div a {
+        height: 45px;
+        width: 150px;
+        background-color: var(--theme);
+        color: white;
+        border-radius: 30px 0;
+        cursor: pointer;
+        font-size: 14px;
+        text-decoration: none;
+        display: grid;
+        place-content: center;
+      }
+      footer p {
+        color: var(--theme);
+      }
+      /* effect */
+      .effectelem {
+        opacity: 0;
+        transform: scale(0.6) translateY(100px);
+        transition: 0.4s;
+      }
+      .effect {
+        opacity: 1;
+        transform: scale(1) translateY(0px);
+      }
+    </style>
+    <!-- mobile -->
+    <style>
+      @media screen and (width<450px) {
+        ::-webkit-scrollbar {
+          background-color: unset;
+          width: unset;
+        }
+        ::-webkit-scrollbar-thumb {
+          background-color: unset;
+          border-radius: unset;
+        }
+        nav {
+          height: 80px;
+        }
+        .innernav {
+          padding-inline: 20px;
+        }
+        .locationbutton {
+          height: 40px;
+          aspect-ratio: 1;
+          margin-left: auto;
+        }
+        .rightnav {
+          position: fixed;
+          top: unset;
+          bottom: 0;
+          right: 0;
+          height: 50px;
+          width: 100%;
+          background-color: white;
+          align-items: center;
+          justify-content: space-between;
+          padding-inline: 20px;
+          box-sizing: border-box;
+          border-top: 1px solid var(--theme);
+        }
+        .rightnav a {
+          font-size: 18px;
+        }
+        /* page1 */
+        .page1 {
+          width: calc(100% - 10px);
+          flex-direction: column;
+          padding-top: 0;
+        }
+        .page1 > div {
+          width: 100%;
+        }
+        .page1left {
+          padding-inline: 10px;
+        }
+        .page1left .heading {
+          font-size: 10vw;
+          margin-top: 100px;
+        }
+        .page1left .heading span {
+          color: var(--theme);
+        }
+        .page1left > p {
+          font-style: italic;
+          text-align: justify;
+          padding-inline: 30px;
+        }
+        .page1left .buttoncontainer {
+          justify-content: center;
+        }
+        /*  */
+        .page1left .details {
+          display: flex;
+          width: 100%;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 50px;
+        }
+        .page1left .details span h2 {
+          text-align: center;
+          position: relative;
+        }
+        .page1left .details span h2::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 0;
+          height: 50%;
+          border-radius: 100%;
+          aspect-ratio: 1;
+          background-color: var(--theme);
+          transform: translateX(-50%) translateY(-50%);
+        }
+        .page1left .details span p {
+          text-align: center;
+          transform: translateY(-100%);
+        }
+        /*  */
+        .page1right {
+          position: relative;
+        }
+        .page1right img {
+          aspect-ratio: 4/3;
+          border-radius: 3% 3% 3% 30% / calc(3% * 4 / 3) calc(3% * 4 / 3)
+            calc(3% * 4 / 3) calc(30% * 4 / 3);
+        }
+        .page1right::before,
+        .page1right::after {
+          aspect-ratio: 4/3;
+        }
+        .page1right::before {
+          border-radius: 30% 3% 3% 3% / calc(30% * 4 / 3) calc(3% * 4 / 3)
+            calc(3% * 4 / 3) calc(3% * 4 / 3);
+        }
+        .page1right::after {
+          aspect-ratio: 4/3;
+          border-radius: 3% 3% 30% 3% / calc(3% * 4 / 3) calc(3% * 4 / 3)
+            calc(30% * 4 / 3) calc(3% * 4 / 3);
+        }
+        /* page 2 */
+        .page2 {
+          width: calc(100% - 10px);
+        }
+        .whyus {
+          font-size: 10vw;
+          padding-inline: 0;
+        }
+        .innerpage2container {
+          display: flex;
+          flex-direction: column;
+        }
+        .page2left img {
+          aspect-ratio: 4/3;
+          object-position: bottom;
+          border-radius: 3% 30% 3% 3% / calc(3% * 4 / 3) calc(30% * 4 / 3)
+            calc(3% * 4 / 3) calc(3% * 4 / 3);
+        }
+        /* outr best students */
+        .ourbeststudents {
+          font-size: 10vw;
+          padding-inline: 0;
+        }
+        .studentscontainer {
+          width: 100%;
+          height: unset;
+          box-sizing: border-box;
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+          padding: 10px;
+        }
+        /* note */
+        .note {
+          font-size: 10vw;
+          padding-inline: none;
+        }
+        .notecontainer p {
+          font-style: italic;
+          font-size: 12px;
+          width: 70%;
+        }
+        /* footer */
+        footer {
+          display: flex;
+          flex-direction: column;
+          margin-bottom: 30px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="innernav">
+        <div class="leftnav">
+          <img
+            src="https://i.pinimg.com/736x/0d/cf/b5/0dcfb548989afdf22afff75e2a46a508.jpg"
+            alt=""
+            class="logo"
+          />
+          <div class="title">RV Science Classes</div>
+        </div>
+        <a
+          class="locationbutton"
+          href="https://www.google.com/maps/dir//RV+Science+Classes/data=!4m8!4m7!1m0!1m5!1m1!1s0x390d175767b9623b:0xc13aa71b5ed4fd03!2m2!1d77.0044814!2d28.479602"
+          ><svg
+            viewBox="-21 -21 142.00 142.00"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            aria-hidden="true"
+            role="img"
+            class="iconify iconify--gis"
+            preserveAspectRatio="xMidYMid meet"
+            fill="var(--theme)"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M50.001 0C33.65 0 20.25 13.36 20.25 29.666c0 6.318 2.018 12.19 5.433 17.016L46.37 82.445c2.897 3.785 4.823 3.066 7.232-.2l22.818-38.83c.46-.834.822-1.722 1.137-2.629a29.28 29.28 0 0 0 2.192-11.12C79.75 13.36 66.354 0 50.001 0zm0 13.9c8.806 0 15.808 6.986 15.808 15.766c0 8.78-7.002 15.763-15.808 15.763c-8.805 0-15.81-6.982-15.81-15.763c0-8.78 7.005-15.765 15.81-15.765z"
+                fill="var(--theme)"
+              ></path>
+              <path
+                d="M68.913 48.908l-.048.126c.015-.038.027-.077.042-.115l.006-.011z"
+                fill="var(--theme)"
+              ></path>
+              <path
+                d="M34.006 69.057C19.88 71.053 10 75.828 10 82.857C10 92.325 26.508 100 50 100s40-7.675 40-17.143c0-7.029-9.879-11.804-24.004-13.8l-1.957 3.332C74.685 73.866 82 76.97 82 80.572c0 5.05-14.327 9.143-32 9.143c-17.673 0-32-4.093-32-9.143c-.001-3.59 7.266-6.691 17.945-8.174c-.645-1.114-1.294-2.226-1.94-3.341z"
+                fill="var(--theme)"
+              ></path>
+            </g>
+          </svg>
+        </a>
+        <div class="rightnav">
+          <a href="#home">Home</a>
+          <a href="#aboutus">About us</a>
+          <a href="#contact">Contact</a>
+          <a href="#address">Address</a>
+        </div>
+      </div>
+    </nav>
+    <section class="page1" id="home">
+      <div class="page1left">
+        <div class="heading effectelem" id="mainheading">
+          <span>Master </span>of Consistency and <span> Quality </span>
+        </div>
+        <p class="effectelem" id="address"></p>
+        <div class="buttoncontainer effectelem">
+          <button>Explore</button>
+          <button>Contact us</button>
+        </div>
+        <div class="details effectelem">
+          <span
+            ><h2>25,00+</h2>
+            <p>projects done</p>
+          </span>
+          <span
+            ><h2>25,00+</h2>
+            <p>projects done</p>
+          </span>
+          <span
+            ><h2>25,00+</h2>
+            <p>projects done</p>
+          </span>
+        </div>
+      </div>
+      <div class="page1right effectelem">
+        <img id="image1" src="" alt="" />
+      </div>
+    </section>
+    <div class="page1bottom effectelem">
+      <span>Lorem</span>
+      <span>Lorem</span>
+      <span>Lorem</span>
+      <span>Lorem</span>
+      <span>Lorem</span>
+    </div>
+    <section class="page2" id="aboutus">
+      <div class="whyus effectelem">Why choose us!</div>
+      <div class="innerpage2container">
+        <div class="page2left">
+          <img id="image2" class="effectelem" src="" alt="" />
+        </div>
+        <div class="page2right" id="whyus"></div>
+      </div>
+      <!-- our best students -->
+      <div class="ourbeststudents effectelem">Our best Students</div>
+      <div class="studentscontainer" id="beststudents"></div>
+      <!-- note -->
+      <div class="note effectelem">A note from ceo</div>
+      <div class="notecontainer effectelem">
+        <h2>Welcome</h2>
+        <p id="notebyceo"></p>
+      </div>
+      <!-- Contact us -->
+      <footer>
+        <div class="contact effectelem" id="contact">
+          <h3>Contact</h3>
+          <p id="phoneno"></p>
+          <a id="telephone" href="">Call now</a>
+          <a id="whatsapp" href="">Whatsapp</a>
+        </div>
+        <div class="address effectelem" id="address">
+          <h3>Address</h3>
+          <p id="addressbottom"></p>
+          <a
+            href="https://www.google.com/maps/dir//RV+Science+Classes/data=!4m8!4m7!1m0!1m5!1m1!1s0x390d175767b9623b:0xc13aa71b5ed4fd03!2m2!1d77.0044814!2d28.479602"
+            >Get directions</a
+          >
+        </div>
+        <div class="openinghrs effectelem" id="oppeninghours">
+          <h3>Opening Hours</h3>
+        </div>
+      </footer>
+    </section>
+  </body>
+  <!-- ui -->
+  <script>
+    // nav
+    window.onscroll = scrollfunction;
+    function scrollfunction() {
+      if (window.scrollY <= 10) {
+        document.querySelector("nav").classList.remove("transnav");
+      } else {
+        document.querySelector("nav").classList.add("transnav");
+      }
+      // effect
+      document.querySelectorAll(".effectelem").forEach((item) => {
+        if (item.getBoundingClientRect().top < window.innerHeight - 100) {
+          item.classList.add("effect");
+        }
+        if (item.getBoundingClientRect().top > window.innerHeight + 100)
+          item.classList.remove("effect");
+      });
+    }
+    scrollfunction();
+    window.scrollTo(0, 0);
+    // nav buttons
+    document.querySelectorAll(".rightnav a").forEach((item) => {
+      item.onclick = () => {
+        document.querySelectorAll(".rightnav a").forEach((item) => {
+          item.style.color = "rgb(61, 61, 61)";
+        });
+        item.style.color = "var(--theme)";
+      };
+    });
+    // get data
+    fetch("data")
+      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        document.querySelector(".locationbutton").href = res.maplink;
+        document.querySelector("#mainheading").innerHTML = res.mainheading;
+        document.querySelector("#address").innerHTML = res.address;
+        document.querySelector("#image1").src = res.image1;
+        //
+        document.querySelector("#image2").src = res.image2;
+        res.whyus.forEach((item, i) => {
+          let element = document.createElement("div");
+          element.classList.add("container", "effectelem");
+          element.innerHTML = `
+          <div class="number">0${i + 1}</div>
+          <div class="text">
+           ${item}
+          </div>
+          `;
+          document.querySelector("#whyus").appendChild(element);
+        });
+        //
+        res.topstd.forEach((item) => {
+          let element = document.createElement("div");
+          element.classList.add("studentscard", "effectelem");
+          element.innerHTML = `
+          <div class="studentstar"></div>
+          <img src="${item.image}" alt="" />
+          <div class="name">${item.name}</div>
+          <div class="subject">${item.subject}</div>
+          <div class="marks">${item.marks}</div>
+          `;
+          document.querySelector("#beststudents").appendChild(element);
+        });
+        //
+        document.querySelector("#notebyceo").innerHTML = res.notebyceo;
+        //
+        document.querySelector("#phoneno").innerHTML = "Ph: " + res.phoneno;
+        document.querySelector("#telephone").href = "tel:" + res.phoneno;
+        document.querySelector("#whatsapp").href =
+          "whatsapp://send?phone=" +
+          res.whatsaappno +
+          "&text=" +
+          res.whatsaappmessage;
+        //
+        document.querySelector("#addressbottom").innerHTML = res.address;
+        //
+        res.openinghours.forEach((item) => {
+          let element = document.createElement("p");
+          element.innerHTML = item;
+          document.querySelector("#oppeninghours").appendChild(element);
+        });
+      });
+  </script>
+</html>
