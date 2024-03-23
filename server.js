@@ -16,9 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 //
 app.use(express.static("./build"));
 
-const db_link =
-  "mongodb+srv://polidahiya830:12er56ui90%40Poli@cluster0.pvrgiqn.mongodb.net/?retryWrites=true&w=majority";
-
+const db_link =prcess.env.mongolink;
 mongoose.connect(db_link).then(async function () {
   const client = new MongoClient(db_link);
   await client.connect();
