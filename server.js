@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 //
 app.use(express.static("./build"));
 
-const db_link =prcess.env.mongolink;
+const db_link =process.env.mongolink;
 mongoose.connect(db_link).then(async function () {
   const client = new MongoClient(db_link);
   await client.connect();
